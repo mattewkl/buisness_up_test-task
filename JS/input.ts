@@ -19,4 +19,17 @@ HEADER__CLOSE_SEARCH_BUTTON.addEventListener('click',() => blurInput(HEADER__SEA
 HEADER__SEARCH_INPUT.addEventListener("focusout", () => placeholderName(HEADER__SEARCH))
 HEADER__SEARCH_INPUT.addEventListener("focus", () => placeholderName(HEADER__SEARCH))
 
-console.log(HEADER__CLOSE_SEARCH_BUTTON)
+const BOTTOMNAV_MENU_BUTTON_SELECTOR:string = '.bottom-nav__button_menu'
+const BOTTOMNAV_MENU_BUTTON:HTMLElement = document.querySelector(BOTTOMNAV_MENU_BUTTON_SELECTOR)
+
+const BOTTOM_MENU_SELECTOR:string = '.bottom-nav__menu'
+const BOTTOM_MENU_OPENED_CLASS:string = 'bottom-nav__menu_opened'
+const BOTTOM_MENU:HTMLElement = document.querySelector(BOTTOM_MENU_SELECTOR)
+
+function toggleBottomMenu():void {
+    BOTTOM_MENU.classList.toggle(BOTTOM_MENU_OPENED_CLASS)
+}
+
+BOTTOMNAV_MENU_BUTTON.addEventListener('click', toggleBottomMenu)
+
+console.log(BOTTOMNAV_MENU_BUTTON)

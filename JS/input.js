@@ -14,4 +14,13 @@ function placeholderName(element) {
 HEADER__CLOSE_SEARCH_BUTTON.addEventListener('click', function () { return blurInput(HEADER__SEARCH_INPUT); });
 HEADER__SEARCH_INPUT.addEventListener("focusout", function () { return placeholderName(HEADER__SEARCH); });
 HEADER__SEARCH_INPUT.addEventListener("focus", function () { return placeholderName(HEADER__SEARCH); });
-console.log(HEADER__CLOSE_SEARCH_BUTTON);
+var BOTTOMNAV_MENU_BUTTON_SELECTOR = '.bottom-nav__button_menu';
+var BOTTOMNAV_MENU_BUTTON = document.querySelector(BOTTOMNAV_MENU_BUTTON_SELECTOR);
+var BOTTOM_MENU_SELECTOR = '.bottom-nav__menu';
+var BOTTOM_MENU_OPENED_CLASS = 'bottom-nav__menu_opened';
+var BOTTOM_MENU = document.querySelector(BOTTOM_MENU_SELECTOR);
+function toggleBottomMenu() {
+    BOTTOM_MENU.classList.toggle(BOTTOM_MENU_OPENED_CLASS);
+}
+BOTTOMNAV_MENU_BUTTON.addEventListener('click', toggleBottomMenu);
+console.log(BOTTOMNAV_MENU_BUTTON);
