@@ -34,6 +34,19 @@
 
 
 
+.reg-15-text
+  font-family: TT Norms Pro
+  font-size: 15px
+  font-weight: 400
+  line-height: 19px
+  letter-spacing: 0em
+  text-align: left
+  color: #222427
+
+.reg-15-text_bottom-nav
+  @media screen and (max-width: 1110px)
+    +font-dynamic(1110, 1110px, 375, 22.75, 22.75px, 15)
+
 .med-12-text
   font-family: TT Norms Pro
   font-size: 12px
@@ -63,11 +76,15 @@
   width: 24px
   aspect-ratio: 1/1
 
+.base-icon_marker
+  background-image: url("../includes/images/header/map-marker-icon.svg")
+
+
 .base-icon_bottom-nav
   @media screen and (max-width: 1110px)
     background-repeat: no-repeat
     background-size: cover
-    +width-dynamic(1110, 1110px, 375, 36, 36px, 24)
+    +width-dynamic(1110, 1110px, 360, 36, 36px, 24)
 
 .base-icon_search
   background-image: url("../includes/images/header/search-icon.svg")
@@ -377,6 +394,7 @@
 
 .bottom-nav
   position: relative
+  background-color: white
   padding-block: 11px
   display: none
   position: fixed
@@ -390,18 +408,22 @@
     padding: 0 0 0 0
 
 .bottom-nav__buttons-list
+  z-index: 1
+  box-shadow: 0px -4px 30px 0px #0000001A
   display: flex
   flex-direction: row
   @media screen and (max-width: 1110px)
+    width: 100%
     height: 76px
     +gap-dynamic(1110, 1110px, 360, 72, 72px, 0)
     align-self: center
     justify-content: center
   @media screen and (max-width: 575px)
-    height: 45.25px
+    height: 66.25px
+    align-items: center
     align-self: center
   @media screen and (max-width: 360px)
-    height: 42px
+    height: 64px
 
 
 .bottom-nav__button
@@ -418,21 +440,92 @@
   transition: all 0.3s ease-in-out
   transform: translateY(-100%)
   position: absolute
+  flex-direction: column
   width: 100%
   left: 0
   @media screen and (max-width: 1110px)
     height: calc(100vh - 60px - 98px)
     bottom: 98px
   @media screen and (max-width: 575px)
-    bottom: 45.25px
-    height: calc(100vh - 60px - 45.25px)
+    bottom: 66.25px
+    height: calc(100vh - 60px - 66.25px)
   @media screen and (max-width: 360px)
-    bottom: 42px
-    height: calc(100vh - 60px - 42px)
+    bottom: 64px
+    height: calc(100vh - 60px - 64px)
   background-color: black
 
 .bottom-nav__menu_opened
   display: flex
   transform: translateY(0)
+
+.bottom-nav__menu-icons-nav
+  display: flex
+  border-top: 1px solid #E4E4E7
+  width: 100%
+  background-color: white
+
+.bottom-nav__menu-icons-list
+  display: grid
+  flex-direction: row
+  width: 100%
+  grid-template-columns: 1fr 1fr 1fr
+  height: min-content
+
+.bottom-nav__menu-icons-nav-list-item
+  display: flex
+  align-items: center
+  justify-content: center
+  padding-block: 18px
+  border-right: 1px solid #E4E4E7
+
+.bottom-nav__menu-icons-nav-list-item:last-of-type
+  border-right: none
+
+
+.bottom-nav__menu-address
+  display: flex
+  align-items: center
+  justify-content: center
+  width: 100%
+  padding-block: 18px
+  background-color: white
+  border-block: 1px solid #E4E4E7
+  @media screen and (max-width: 360px)
+    justify-content: start
+    padding-left: 20px
+
+
+.bottom-nav__menu-address-link
+  display: flex
+  flex-direction: row
+  gap: 12px
+  align-items: center
+
+.bottom-nav__main-nav-panel
+  background-color: white
+  display: flex
+  flex-grow: 1
+  flex-direction: column
+  align-items: center
+  justify-content: center
+
+.bottom-nav__main-nav-list
+  display: flex
+  height: 100%
+  flex-direction: column
+  padding-block: 36px
+  gap: 36px
+  align-items: center
+
+.bottom-nav__main-nav-call-request
+  display: flex
+  align-items: center
+  justify-content: center
+  width: 152px
+  height: 40px
+  border: 1px solid #8BBF1F
+  border-radius: 2px
+
+
 
 
