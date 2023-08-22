@@ -8,9 +8,6 @@
     <title>Document</title>
 </head>
 <body class="standart-body">
-<div class="popup-module">
-
-</div>
 <nav class="bottom-nav no-mp-border-box">
     <nav class="bottom-nav__menu">
         <nav class="bottom-nav__menu-address no-mp-border-box">
@@ -66,7 +63,7 @@
         </button></li>
     </ul>
 </nav>
-<header class="header no-mp-border-box">
+<header class="header no-mp-border-box z-3">
     <article class="header__logo-block no-mp-border-box">
         <i class="header__logo no-mp-border-box"></i>
         <p class="header__logo-description no-mp-border-box">
@@ -126,15 +123,66 @@
             <li class="no-mp-border-box"><a class="caps-15med-text no-link-styles">контакты</a></li>
         </ul>
     </nav>
-    <nav class="header__icon-based-navbar">
+    <nav class="header__icon-based-navbar z-3">
+        </article>
         <ul CLASS="header__icon-based-navbar-list no-mp-border-box no-list-styles ">
             <li class="header__icon-based-navbar-list-item"><i class="base-icon base-icon_compare no-mp-border-box"></i></li>
             <li class="header__icon-based-navbar-list-item"><i class="base-icon base-icon_like no-mp-border-box"></i></li>
             <li class="header__icon-based-navbar-list-item"><i class="base-icon base-icon_cart no-mp-border-box"></i></li>
             <li class="header__icon-based-navbar-list-item"><i class="base-icon base-icon_profile no-mp-border-box"></i></li>
         </ul>
+        <article class="header__cart-block no-mp-border-box z-3">
+                <template class="header__cart-item-template">
+                    <li class="header__cart-item header__cart-item-start-selector no-mp-border-box">
+                        <figure class="header__cart-item-figure no-mp-border-box">
+                            <picture>
+                                <source class="path-png" srcset="./includes/images/header/door-1-full.png">
+                                <source class="path-webp" srcset="./includes/images/header/door-1-full.webp">
+                                <img class="header__cart-item-image" src="#" alt="#">
+                            </picture>
+                            <figcaption class="header__cart-item-caption">
+                                <p class="header__cart-item-name med-14-text no-mp-border-box">
+
+                                </p>
+                                <p class="header__cart-item-description no-mp-border-box med-12-text med-12-text_caption">
+
+                                </p>
+                            </figcaption>
+                        </figure>
+                        <div class="header__cart-item-price-block no-mp-border-box">
+                            <p class="header__cart-item-price med-14-text no-mp-border-box"></p>
+                            <div class="header__cart-item-amount-block">
+                                <button class="header__change-items-amount-button header__change-items-amount-button_reduce no-button-classes no-mp-border-box"></button>
+                                <p class="header__cart-item-amount med-14-text no-mp-border-box">0</p>
+                                <button class="header__change-items-amount-button header__change-items-amount-button_add no-button-classes no-mp-border-box"></button>
+                            </div>
+                        </div>
+                    </li>
+                </template>
+            <ul class="header__cart-items no-list-styles no-mp-border-box">
+                <li class="header__cart-item header__cart-item_no-items reg-15-text no-mp-border-box">В корзине ничего нет...</li>
+            </ul>
+            <article class="header__cart-confirmation-block">
+                <p class="med-16-text no-mp-border-box">
+                    Сумма заказа:&nbsp;&nbsp;&nbsp;<span class="header__class-total no-mp-border-box">дохуя денег</span>
+                </p>
+                <button class="header__cart-confirm med-15-text_color no-mp-border-box no-button-classes">Перейти к оформлению →</button>
+            </article>
+        </article>
     </nav>
 </header>
+<main class="main">
+    <button class="add-door-1">Добавить дверь 1</button>
+    <button class="add-door-2">Добавить дверь 2</button>
+    <button class="add-door-3">Добавить дверь 3</button>
+    <button class="add-door-4">Добавить дверь 4</button>
+</main>
+
+
+<div class="standart-overlay">
+
+</div>
+
 
 <!--Scripts links-->
 <script src="./JS/input.js"></script>

@@ -20,6 +20,9 @@
 
 //переход на мобилку - 1110
 
+.d-none
+  display: none!important
+
 .no-button-classes
   border: none
   background: none
@@ -28,10 +31,46 @@
   text-decoration: none
   color: inherit
 
+
+
 .no-list-styles
   list-style: none
   list-style-type: none
 
+
+//.standart-overlay
+//  display: flex
+//  width: 100%
+//  height: 100%
+//  background-color: #E4E4E7
+
+
+
+
+
+
+.med-15-text
+  font-family: TT Norms Pro
+
+.med-15-text_white
+  color: white
+
+
+.med-14-text
+  font-family: TT Norms Pro
+  font-size: 14px
+  font-weight: 500
+  line-height: 18px
+  letter-spacing: 0em
+  text-align: left
+
+.med-16-text
+  font-family: TT Norms Pro
+  font-size: 16px
+  font-weight: 500
+  line-height: 21px
+  letter-spacing: 0em
+  text-align: left
 
 
 .reg-15-text
@@ -55,6 +94,9 @@
   letter-spacing: 0em
   text-align: center
   color: #5E6062
+
+.med-12-text_caption
+  text-align: left
 
 .med-12-text_bottom-nav
   @media screen and (max-width: 1110px)
@@ -129,13 +171,18 @@
   display: flex
   flex-direction: column
   background-color: white
+  z-index: 0
 
 .header
   display: grid
+  width: 100%
+  top: 0
+  left: 0
   grid-template-areas: "logo search address contacts" "catalog navbar navbar icons-navbar"
   grid-template-columns: 20% 30% 30% 20%
   background-color: white
   color: #222427
+  border-bottom: 1px solid #E4E4E7
   @media screen and (max-width: 1110px)
     grid-template-areas: "logo contacts"
     grid-template-columns: 38.89% 61.11%
@@ -150,11 +197,15 @@
   grid-area: logo
   padding-right: 24px
   justify-content: space-between
+  border-bottom: 1px solid #E4E4E7
+  border-right: 1px solid #E4E4E7
   @media screen and (max-width: 1919px)
     +paddingL-dynamic(1919, 1919px, 1550, 50, 50px, 10)
     +paddingR-dynamic(1919, 1919px, 1550, 24, 24px, 5)
   @media  screen and (max-width: 1549px)
     padding-left: 50px
+  @media  screen and (max-width: 1110px)
+    border: none
   @media screen and (max-width: 575px)
     padding-block: 12px
     padding-left: 20px
@@ -192,6 +243,8 @@
   color: #222427
 
 .header__search-container
+  border-bottom: 1px solid #E4E4E7
+  border-right: 1px solid #E4E4E7
   position: relative
   display: flex
   padding-block: 28px
@@ -208,6 +261,7 @@
 
 .header__search-container.js-added-active
   outline: 1px solid #8BBF1F
+  border: none
 
 .header__search
   flex-direction: row
@@ -236,6 +290,8 @@
   flex-direction: row
   align-items: center
   justify-content: center
+  border-bottom: 1px solid #E4E4E7
+  border-right: 1px solid #E4E4E7
   @media screen and (max-width: 1110px)
     display: none
 
@@ -260,6 +316,7 @@
   text-align: left
   color: #222427
 
+
 .header__search-close-icon
   display: none
 
@@ -270,10 +327,12 @@
   gap: 24px
   align-items: center
   justify-content: center
+  border-bottom: 1px solid #E4E4E7
   @media screen and (max-width: 1600px)
     flex-direction: column
     gap: 0px
   @media screen and (max-width: 1110px)
+    border: none
     align-items: end
     padding-right: 39px
 
@@ -311,8 +370,6 @@
     display: none
 
 
-
-
 .header__contacts-container
   display: flex
   flex-direction: row
@@ -333,15 +390,13 @@
   gap: 44px
   justify-content: start
   padding-left: 50px
+  border-right: 1px solid #E4E4E7
   @media screen and (max-width: 1919px)
     +paddingL-dynamic(1919, 1919px, 1550, 50, 50px, 10)
   @media  screen and (max-width: 1549px)
     padding-left: 50px
   @media screen and (max-width: 1110px)
     display: none
-
-
-
   grid-area: catalog
   padding-block: 28px
 
@@ -357,6 +412,7 @@
   justify-content: center
   align-items: center
   grid-area: navbar
+  border-right: 1px solid #E4E4E7
   @media screen and (max-width: 1110px)
     display: none
 
@@ -369,12 +425,60 @@
 
 .header__icon-based-navbar
   display: flex
-  flex-direction: row
+  position: relative
+  flex-direction: column
   justify-content: center
   align-items: center
   grid-area: icons-navbar
   @media screen and (max-width: 1110px)
     display: none
+
+.header__cart-block
+  display: flex
+  position: absolute
+  flex-direction: column
+  width: 384px
+  top: 80px
+  right: 0
+  min-height: 499px
+  box-shadow: -10px 10px 15px -15px #5E6062
+
+
+.header__cart-items
+  display: flex
+  flex-direction: column
+  width: 100%
+  min-height: 368px
+
+.header__cart-item
+  display: flex
+  flex-direction: row
+  align-items: center
+  justify-content: center
+  border-bottom: 1px solid #5E6062
+  height: 92px
+  gap: 12px
+  width: 100%
+
+.header__cart-item-figure
+  display: flex
+  flex-direction: row
+  gap: 16px
+  width: 260px
+
+.header__cart-item-caption
+  display: flex
+  flex-direction: column
+  gap: 4px
+
+.header__cart-item-image
+  display: flex
+  width: 56px
+  height: 60px
+  object-fit: contain
+
+
+
 
 
 .header__icon-based-navbar-list
@@ -392,10 +496,63 @@
   width: 44px
   height: 44px
 
+.header__cart-item-price-block
+  display: flex
+  flex-direction: column
+  height: 56px
+  gap: 14px
+  max-width: 80px
+
+.header__cart-item-amount-block
+  display: flex
+  flex-direction: row
+  gap: 4px
+
+
+.header__cart-item-amount
+  display: flex
+  justify-content: center
+  width: 22px
+  height: 21px
+
+.header__change-items-amount-button
+  width: 16px
+  height: 16px
+  display: flex
+
+.header__change-items-amount-button_add
+  background-image: url("../includes/images/header/plus-icon.svg")
+
+.header__change-items-amount-button_reduce
+  background-image: url("../includes/images/header/minus-icon.svg")
+
+
+.header__cart-confirmation-block
+  display: flex
+  flex-direction: column
+  gap: 20px
+  border-top: 1px solid #E4E4E7
+  padding: 20px 24px 24px
+
+.header__cart-confirm
+  display: flex
+  align-items: center
+  justify-content: center
+  width: 100%
+  height: 46px
+  background-color: #8BBF1F
+  color: white
+  font-size: 15px
+  font-weight: 500
+  line-height: 19px
+  letter-spacing: 0em
+  text-align: center
+
+
+
 .bottom-nav
   position: relative
   background-color: white
-  padding-block: 11px
   display: none
   position: fixed
   bottom: 0
@@ -414,13 +571,12 @@
   flex-direction: row
   @media screen and (max-width: 1110px)
     width: 100%
-    height: 76px
+    height: 98px
     +gap-dynamic(1110, 1110px, 360, 72, 72px, 0)
-    align-self: center
+    align-items: center
     justify-content: center
   @media screen and (max-width: 575px)
     height: 66.25px
-    align-items: center
     align-self: center
   @media screen and (max-width: 360px)
     height: 64px
@@ -495,6 +651,7 @@
     padding-left: 20px
 
 
+
 .bottom-nav__menu-address-link
   display: flex
   flex-direction: row
@@ -521,10 +678,21 @@
   display: flex
   align-items: center
   justify-content: center
-  width: 152px
-  height: 40px
+  @media screen and (max-width: 1110px)
+    width: 205px
+    height: 60px
+
+  @media screen and (max-width: 768px)
+    width: 190px
+    height: 55px
+  @media screen and (max-width: 768px)
+    width: 152px
+    height: 40px
   border: 1px solid #8BBF1F
   border-radius: 2px
+
+
+
 
 
 
