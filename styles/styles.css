@@ -37,6 +37,11 @@
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
 }
+@media screen and (max-width: 1110px) {
+  .standart-overlay {
+    display: none;
+  }
+}
 
 .med-15-text {
   font-family: TT Norms Pro;
