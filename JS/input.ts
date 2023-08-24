@@ -3,13 +3,16 @@
 const CART_ITEM_AMOUNT_SELECTOR:string = '.header__cart-item-amount'
 const CART_ITEM_PRICE_SELECTOR:string = '.header__cart-item-price'
 const NO_ITEMS_SELECTOR:string = '.header__cart-item_no-items'
-const ADD_DOOR1_BTN_SELECTOR:string = '.add-door-1'
-const ADD_DOOR2_BTN_SELECTOR:string = '.add-door-2'
-const ADD_DOOR3_BTN_SELECTOR:string = '.add-door-3'
-const ADD_DOOR4_BTN_SELECTOR:string = '.add-door-4'
+const ADD_DOOR1_BTN_SELECTOR:string = '.add-door_1'
+const ADD_DOOR2_BTN_SELECTOR:string = '.add-door_2'
+const ADD_DOOR3_BTN_SELECTOR:string = '.add-door_3'
+const ADD_DOOR4_BTN_SELECTOR:string = '.add-door_4'
+const CHECKBOX_SELECTOR:string = 'popup-acceptance-one'
+const CHECKBOX_CONTAINER_SELECTOR:string = '.standart-form__acceptance'
 const HEADER__CLOSE_SEARCH_BUTTON_SELECTOR:string = '.header__search-close-icon'
 const HEADER__SEARCH_SELECTOR:string = '.header__search-container'
 const OPEN_CART_SELECTOR:string = '.base-icon_cart-js-selector-header'
+const OPEN_FORM_SELECTOR:string = '.base-icon_profile-js-selector-header'
 const HEADER__SEARCH_INPUT_SELECTOR:string = '.header__search'
 const CARTLIST_SELECTOR:string = '.header__cart-items'
 const BOTTOM_MENU_SELECTOR:string = '.bottom-nav__menu'
@@ -19,6 +22,7 @@ const CART_ITEM_TEMPLATE_SELECTOR:string = '.header__cart-item-template'
 const CART_ITEM_SELECTOR:string = '.header__cart-item-start-selector'
 const CART_ITEM_START_CLASS:string = 'header__cart-item-start-selector'
 const JS_ACTIVE_CLASS:string = 'js-added-active'
+const OVERLAY_POPUP_SELECTOR:string = '.standart-overlay_popup'
 
 //types declarations
 
@@ -46,8 +50,9 @@ type cartImageInfo = {
 }
 
 //constants
-
+const OVERLAY_POPUP:HTMLElement = document.querySelector(OVERLAY_POPUP_SELECTOR)
 const OPEN_CART_BTN:HTMLElement = document.querySelector(OPEN_CART_SELECTOR)
+const OPEN_FORM_BTN:HTMLElement = document.querySelector(OPEN_FORM_SELECTOR)
 const CART_ITEM_TEMPLATE:HTMLTemplateElement = document.querySelector(CART_ITEM_TEMPLATE_SELECTOR)
 const CART_ITEM_NODE = CART_ITEM_TEMPLATE.content.querySelector(CART_ITEM_SELECTOR).cloneNode(true)
 const ADD_DOOR1_BTN:HTMLElement = document.querySelector(ADD_DOOR1_BTN_SELECTOR)
@@ -64,6 +69,9 @@ const ITEMS_TOTAL_ELEMENT:HTMLParagraphElement = OPEN_CART_BTN.querySelector('.h
 const HEADER__SEARCH_INPUT:HTMLElement = document.querySelector(HEADER__SEARCH_INPUT_SELECTOR)
 const HEADER__CLOSE_SEARCH_BUTTON:HTMLElement = document.querySelector(HEADER__CLOSE_SEARCH_BUTTON_SELECTOR)
 const HEADER__SEARCH:HTMLElement = document.querySelector(HEADER__SEARCH_SELECTOR)
+const CHECKBOX:HTMLElement = document.getElementById(CHECKBOX_SELECTOR)
+const CHECKBOX_CONTAINER:HTMLElement = document.querySelector(CHECKBOX_CONTAINER_SELECTOR)
+
 
 //objects
 const CART_INFO:typeCartInfo = {
@@ -72,7 +80,6 @@ const CART_INFO:typeCartInfo = {
     elements: 0,
     itemsTotal: 0
 }
-
 
 let door1:typeCartItem = {
     name: 'Браво-22 Snow Melinga',
@@ -87,6 +94,7 @@ let door1:typeCartItem = {
         alt: 'Межкомнатная дверь Браво-22 Snow Melinga, no magic fog'
     }
 }
+
 let door3:typeCartItem = {
     name: 'Тестовая дверь',
     description: 'Межкомнатная дверь',
@@ -262,11 +270,18 @@ function addItemInCart(cartItem:typeCartItem):void {
         renderItemsTotal()
     }}
 
+function toggleAcceptanceClass():void {
+    CHECKBOX_CONTAINER.classList.toggle('checked-js-class')
+}
+
+function togglePopup():void {
+    CART_ELEMENT.classList.add('d-none')
+    OVERLAY_POPUP.classList.toggle('d-none')
+    OPEN_CART_BTN.classList.toggle('disabled')
+}
+
 
 //event listeners
-
-console.log(ADD_DOOR1_BTN)
-
 BOTTOMNAV_MENU_BUTTON.addEventListener('click', toggleBottomMenu)
 HEADER__CLOSE_SEARCH_BUTTON.addEventListener('click',() => blurInput(HEADER__SEARCH_INPUT))
 HEADER__SEARCH_INPUT.addEventListener("focusout", () => placeholderName(HEADER__SEARCH))
@@ -288,3 +303,5 @@ ADD_DOOR4_BTN.addEventListener('click', () => {
 })
 
 OPEN_CART_BTN.addEventListener('click',() => {CART_ELEMENT.classList.toggle('d-none')})
+CHECKBOX.addEventListener('input', toggleAcceptanceClass)
+OPEN_FORM_BTN.addEventListener('click', togglePopup)

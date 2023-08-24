@@ -27,6 +27,17 @@
   list-style-type: none;
 }
 
+.standart-overlay {
+  z-index: 0;
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
 .med-15-text {
   font-family: TT Norms Pro;
 }
@@ -77,6 +88,15 @@
   letter-spacing: 0em;
   text-align: center;
   color: #5E6062;
+}
+
+.med-22-text-title {
+  font-family: TT Norms Pro;
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 26px;
+  letter-spacing: 0em;
+  text-align: center;
 }
 
 .med-12-text_caption {
@@ -155,10 +175,127 @@
   border: none;
 }
 
+.disabled {
+  pointer-events: none;
+}
+
+.main {
+  display: flex;
+  position: relative;
+  height: 100vh;
+}
+
+.add-door {
+  height: min-content;
+}
+
 .no-mp-border-box {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+.popup-module {
+  display: flex;
+  position: fixed;
+  padding: 40px;
+  border-radius: 4px;
+  background-color: white;
+  top: 278px;
+  left: 40%;
+  width: 400px;
+}
+
+.standart-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.standart-form_popup {
+  gap: 20px;
+}
+
+.standart-form__text-inputs {
+  display: flex;
+  flex-direction: column;
+}
+
+.standart-form__text-inputs_popup {
+  width: 100%;
+  gap: 12px;
+}
+
+.standart-form__text-input {
+  display: flex;
+  width: 100%;
+  height: 46px;
+  border: 1px solid #E4E4E7;
+  border-radius: 4px;
+  padding: 13.5px 12px;
+}
+
+.standart-form__text-input:active {
+  outline-color: #8BBF1F;
+}
+
+.standart-form__text-input:focus {
+  outline-color: #8BBF1F;
+}
+
+.standart-form__acceptance-input {
+  display: none;
+}
+
+.standart-form__acceptance-label {
+  display: flex;
+  width: 284px;
+  position: relative;
+}
+
+.standart-form__acceptance {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: end;
+}
+
+.standart-form__acceptance-label::before {
+  display: flex;
+  position: absolute;
+  top: 23.68%;
+  left: -36px;
+  width: 20px;
+  height: 20px;
+  box-sizing: border-box;
+  background-size: 24px 24px;
+  background-position: center;
+  content: "";
+  border-radius: 4px;
+  border: 1px solid #8BBF1F;
+  transition: all 300ms linear;
+}
+
+.standart-form__acceptance.checked-js-class .standart-form__acceptance-label:hover::before {
+  transition: all 300ms linear;
+  border-color: #A9D44F;
+  background-image: url("../includes/images/checked-icon-hover.svg");
+}
+
+.standart-form__acceptance.checked-js-class .standart-form__acceptance-label::before {
+  transition: all 300ms linear;
+  background-image: url("../includes/images/checked-icon.svg");
+}
+
+.standart-form__acceptance-submit {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 46px;
+  border-radius: 4px;
+  background-color: #8BBF1F;
+  align-items: center;
+  justify-content: center;
 }
 
 .reset-link-style {
@@ -528,6 +665,16 @@
   .header__cart-block {
     width: 384px;
   }
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-container_popup {
+  width: 320px;
+  gap: 32px;
 }
 
 .header__cart-items {

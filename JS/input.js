@@ -2,13 +2,16 @@
 var CART_ITEM_AMOUNT_SELECTOR = '.header__cart-item-amount';
 var CART_ITEM_PRICE_SELECTOR = '.header__cart-item-price';
 var NO_ITEMS_SELECTOR = '.header__cart-item_no-items';
-var ADD_DOOR1_BTN_SELECTOR = '.add-door-1';
-var ADD_DOOR2_BTN_SELECTOR = '.add-door-2';
-var ADD_DOOR3_BTN_SELECTOR = '.add-door-3';
-var ADD_DOOR4_BTN_SELECTOR = '.add-door-4';
+var ADD_DOOR1_BTN_SELECTOR = '.add-door_1';
+var ADD_DOOR2_BTN_SELECTOR = '.add-door_2';
+var ADD_DOOR3_BTN_SELECTOR = '.add-door_3';
+var ADD_DOOR4_BTN_SELECTOR = '.add-door_4';
+var CHECKBOX_SELECTOR = 'popup-acceptance-one';
+var CHECKBOX_CONTAINER_SELECTOR = '.standart-form__acceptance';
 var HEADER__CLOSE_SEARCH_BUTTON_SELECTOR = '.header__search-close-icon';
 var HEADER__SEARCH_SELECTOR = '.header__search-container';
 var OPEN_CART_SELECTOR = '.base-icon_cart-js-selector-header';
+var OPEN_FORM_SELECTOR = '.base-icon_profile-js-selector-header';
 var HEADER__SEARCH_INPUT_SELECTOR = '.header__search';
 var CARTLIST_SELECTOR = '.header__cart-items';
 var BOTTOM_MENU_SELECTOR = '.bottom-nav__menu';
@@ -18,8 +21,11 @@ var CART_ITEM_TEMPLATE_SELECTOR = '.header__cart-item-template';
 var CART_ITEM_SELECTOR = '.header__cart-item-start-selector';
 var CART_ITEM_START_CLASS = 'header__cart-item-start-selector';
 var JS_ACTIVE_CLASS = 'js-added-active';
+var OVERLAY_POPUP_SELECTOR = '.standart-overlay_popup';
 //constants
+var OVERLAY_POPUP = document.querySelector(OVERLAY_POPUP_SELECTOR);
 var OPEN_CART_BTN = document.querySelector(OPEN_CART_SELECTOR);
+var OPEN_FORM_BTN = document.querySelector(OPEN_FORM_SELECTOR);
 var CART_ITEM_TEMPLATE = document.querySelector(CART_ITEM_TEMPLATE_SELECTOR);
 var CART_ITEM_NODE = CART_ITEM_TEMPLATE.content.querySelector(CART_ITEM_SELECTOR).cloneNode(true);
 var ADD_DOOR1_BTN = document.querySelector(ADD_DOOR1_BTN_SELECTOR);
@@ -36,6 +42,8 @@ var ITEMS_TOTAL_ELEMENT = OPEN_CART_BTN.querySelector('.header__cart-total-displ
 var HEADER__SEARCH_INPUT = document.querySelector(HEADER__SEARCH_INPUT_SELECTOR);
 var HEADER__CLOSE_SEARCH_BUTTON = document.querySelector(HEADER__CLOSE_SEARCH_BUTTON_SELECTOR);
 var HEADER__SEARCH = document.querySelector(HEADER__SEARCH_SELECTOR);
+var CHECKBOX = document.getElementById(CHECKBOX_SELECTOR);
+var CHECKBOX_CONTAINER = document.querySelector(CHECKBOX_CONTAINER_SELECTOR);
 //objects
 var CART_INFO = {
     isEmpty: true,
@@ -218,8 +226,15 @@ function addItemInCart(cartItem) {
         renderItemsTotal();
     }
 }
+function toggleAcceptanceClass() {
+    CHECKBOX_CONTAINER.classList.toggle('checked-js-class');
+}
+function togglePopup() {
+    CART_ELEMENT.classList.add('d-none');
+    OVERLAY_POPUP.classList.toggle('d-none');
+    OPEN_CART_BTN.classList.toggle('disabled');
+}
 //event listeners
-console.log(ADD_DOOR1_BTN);
 BOTTOMNAV_MENU_BUTTON.addEventListener('click', toggleBottomMenu);
 HEADER__CLOSE_SEARCH_BUTTON.addEventListener('click', function () { return blurInput(HEADER__SEARCH_INPUT); });
 HEADER__SEARCH_INPUT.addEventListener("focusout", function () { return placeholderName(HEADER__SEARCH); });
@@ -237,3 +252,5 @@ ADD_DOOR4_BTN.addEventListener('click', function () {
     addItemInCart(door4);
 });
 OPEN_CART_BTN.addEventListener('click', function () { CART_ELEMENT.classList.toggle('d-none'); });
+CHECKBOX.addEventListener('input', toggleAcceptanceClass);
+OPEN_FORM_BTN.addEventListener('click', togglePopup);

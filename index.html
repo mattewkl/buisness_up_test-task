@@ -129,7 +129,7 @@
             <li class="header__icon-based-navbar-list-item"><i class="base-icon base-icon_compare no-mp-border-box"></i></li>
             <li class="header__icon-based-navbar-list-item"><i class="base-icon base-icon_like no-mp-border-box"></i></li>
             <li class="header__icon-based-navbar-list-item"><button class="base-icon base-icon_cart base-icon_cart-js-selector-header no-mp-border-box no-button-classes"><p class="d-none no-button-classes header__cart-total-display med-13-text no-mp-border-box">0</p></button></li>
-            <li class="header__icon-based-navbar-list-item"><i class="base-icon base-icon_profile no-mp-border-box"></i></li>
+            <li class="header__icon-based-navbar-list-item"><button class="base-icon base-icon_profile-js-selector-header base-icon_profile no-mp-border-box no-button-classes"></button></li>
         </ul>
         <article class="header__cart-block no-mp-border-box z-3 d-none">
                 <template class="header__cart-item-template">
@@ -171,17 +171,33 @@
         </article>
     </nav>
 </header>
-<main class="main">
-    <button class="add-door-1">Добавить дверь 1</button>
-    <button class="add-door-2">Добавить дверь 2</button>
-    <button class="add-door-3">Добавить дверь 3</button>
-    <button class="add-door-4">Добавить дверь 4</button>
+<main class="main no-mp-border-box ">
+    <button class="add-door add-door_1 no-mp-border-box">Добавить дверь 1</button>
+    <button class="add-door add-door_2 no-mp-border-box">Добавить дверь 2</button>
+    <button class="add-door add-door_3 no-mp-border-box">Добавить дверь 3</button>
+    <button class="add-door add-door_4 no-mp-border-box">Добавить дверь 4</button>
+    <div class="standart-overlay d-none standart-overlay_popup no-mp-border-box">
+        <div class="popup-module  no-mp-border-box">
+            <article class="form-container form-container_popup no-mp-border-box">
+                <h2 class="med-22-text-title no-mp-border-box">Заполните данные и мы свяжемся с вами в рабочее время и ответим на все интересующие вопросы</h2>
+                <form class="standart-form standart-form_popup no-mp-border-box">
+                    <div class="standart-form__text-inputs standart-form__text-inputs_popup no-mp-border-box">
+                        <input type="email" class="standart-form__text-input reg-15-text no-input-styles" required placeholder="Имя*" >
+                        <input type="tel" class="standart-form__text-input reg-15-text no-input-styles" placeholder="Телефон*" >
+                    </div>
+                    <article class="standart-form__acceptance no-mp-border-box">
+                        <label class="standart-form__acceptance-label reg-15-text no-mp-border-box" for="popup-acceptance-one">Даю свое согласие на обработку персональных данных</label>
+                        <input required type="checkbox" class="standart-form__acceptance-input no-mp-border-box" id="popup-acceptance-one">
+                    </article>
+                    <button type="submit"  class="standart-form__acceptance-submit med-15-text med-15-text_white no-mp-border-box no-button-classes">Заказать звонок</button>
+                </form>
+            </article>
+        </div>
+    </div>
 </main>
 
 
-<div class="standart-overlay">
 
-</div>
 
 
 <!--Scripts links-->
