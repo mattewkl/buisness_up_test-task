@@ -1,32 +1,47 @@
+//selectors
+var CART_ITEM_AMOUNT_SELECTOR = '.header__cart-item-amount';
+var CART_ITEM_PRICE_SELECTOR = '.header__cart-item-price';
+var NO_ITEMS_SELECTOR = '.header__cart-item_no-items';
+var ADD_DOOR1_BTN_SELECTOR = '.add-door-1';
+var ADD_DOOR2_BTN_SELECTOR = '.add-door-2';
+var ADD_DOOR3_BTN_SELECTOR = '.add-door-3';
+var ADD_DOOR4_BTN_SELECTOR = '.add-door-4';
 var HEADER__CLOSE_SEARCH_BUTTON_SELECTOR = '.header__search-close-icon';
 var HEADER__SEARCH_SELECTOR = '.header__search-container';
+var OPEN_CART_SELECTOR = '.base-icon_cart-js-selector-header';
 var HEADER__SEARCH_INPUT_SELECTOR = '.header__search';
+var CARTLIST_SELECTOR = '.header__cart-items';
+var BOTTOM_MENU_SELECTOR = '.bottom-nav__menu';
+var BOTTOM_MENU_OPENED_CLASS = 'bottom-nav__menu_opened';
+var BOTTOMNAV_MENU_BUTTON_SELECTOR = '.bottom-nav__button_menu';
+var CART_ITEM_TEMPLATE_SELECTOR = '.header__cart-item-template';
+var CART_ITEM_SELECTOR = '.header__cart-item-start-selector';
+var CART_ITEM_START_CLASS = 'header__cart-item-start-selector';
+var JS_ACTIVE_CLASS = 'js-added-active';
+//constants
+var OPEN_CART_BTN = document.querySelector(OPEN_CART_SELECTOR);
+var CART_ITEM_TEMPLATE = document.querySelector(CART_ITEM_TEMPLATE_SELECTOR);
+var CART_ITEM_NODE = CART_ITEM_TEMPLATE.content.querySelector(CART_ITEM_SELECTOR).cloneNode(true);
+var ADD_DOOR1_BTN = document.querySelector(ADD_DOOR1_BTN_SELECTOR);
+var ADD_DOOR2_BTN = document.querySelector(ADD_DOOR2_BTN_SELECTOR);
+var ADD_DOOR3_BTN = document.querySelector(ADD_DOOR3_BTN_SELECTOR);
+var CART_ELEMENT = document.querySelector('.header__cart-block');
+var ADD_DOOR4_BTN = document.querySelector(ADD_DOOR4_BTN_SELECTOR);
+var BOTTOMNAV_MENU_BUTTON = document.querySelector(BOTTOMNAV_MENU_BUTTON_SELECTOR);
+var BOTTOM_MENU = document.querySelector(BOTTOM_MENU_SELECTOR);
+var CARTLIST = document.querySelector(CARTLIST_SELECTOR);
+var CART_TOTAL = document.querySelector('.header__class-total');
+var NO_ITEMS_ELEMENT = CARTLIST.querySelector(NO_ITEMS_SELECTOR);
+var ITEMS_TOTAL_ELEMENT = OPEN_CART_BTN.querySelector('.header__cart-total-display');
 var HEADER__SEARCH_INPUT = document.querySelector(HEADER__SEARCH_INPUT_SELECTOR);
 var HEADER__CLOSE_SEARCH_BUTTON = document.querySelector(HEADER__CLOSE_SEARCH_BUTTON_SELECTOR);
 var HEADER__SEARCH = document.querySelector(HEADER__SEARCH_SELECTOR);
-var JS_ACTIVE_CLASS = 'js-added-active';
-function blurInput(input) {
-    input.blur();
-}
-function placeholderName(element) {
-    element.classList.toggle(JS_ACTIVE_CLASS);
-}
-HEADER__CLOSE_SEARCH_BUTTON.addEventListener('click', function () { return blurInput(HEADER__SEARCH_INPUT); });
-HEADER__SEARCH_INPUT.addEventListener("focusout", function () { return placeholderName(HEADER__SEARCH); });
-HEADER__SEARCH_INPUT.addEventListener("focus", function () { return placeholderName(HEADER__SEARCH); });
-var BOTTOMNAV_MENU_BUTTON_SELECTOR = '.bottom-nav__button_menu';
-var BOTTOMNAV_MENU_BUTTON = document.querySelector(BOTTOMNAV_MENU_BUTTON_SELECTOR);
-var BOTTOM_MENU_SELECTOR = '.bottom-nav__menu';
-var BOTTOM_MENU_OPENED_CLASS = 'bottom-nav__menu_opened';
-var BOTTOM_MENU = document.querySelector(BOTTOM_MENU_SELECTOR);
-function toggleBottomMenu() {
-    BOTTOM_MENU.classList.toggle(BOTTOM_MENU_OPENED_CLASS);
-}
-BOTTOMNAV_MENU_BUTTON.addEventListener('click', toggleBottomMenu);
+//objects
 var CART_INFO = {
     isEmpty: true,
     total: 0,
-    elements: 0
+    elements: 0,
+    itemsTotal: 0
 };
 var door1 = {
     name: 'Браво-22 Snow Melinga',
@@ -44,8 +59,8 @@ var door1 = {
 var door3 = {
     name: 'Тестовая дверь',
     description: 'Межкомнатная дверь',
-    selector: '.header__cart-item_door1',
-    class: 'header__cart-item_door1',
+    selector: '.header__cart-item_door3',
+    class: 'header__cart-item_door3',
     price: 25000,
     amount: 0,
     image_info: {
@@ -57,8 +72,8 @@ var door3 = {
 var door4 = {
     name: 'Тестовая дверь 2',
     description: 'Межкомнатная дверь',
-    selector: '.header__cart-item_door1',
-    class: 'header__cart-item_door1',
+    selector: '.header__cart-item_door4',
+    class: 'header__cart-item_door4',
     price: 250000,
     amount: 0,
     image_info: {
@@ -80,32 +95,40 @@ var door2 = {
         alt: 'Межкомнатная дверь Браво-22 Snow Melinga'
     }
 };
-var CART_ITEM_TEMPLATE_SELECTOR = '.header__cart-item-template';
-var CART_ITEM_SELECTOR = '.header__cart-item-start-selector';
-var CART_ITEM_START_CLASS = 'header__cart-item-start-selector';
-var CART_ITEM_TEMPLATE = document.querySelector(CART_ITEM_TEMPLATE_SELECTOR);
-var CART_ITEM_NODE = CART_ITEM_TEMPLATE.content.querySelector(CART_ITEM_SELECTOR).cloneNode(true);
-var ADD_DOOR1_BTN_SELECTOR = '.add-door-1';
-var ADD_DOOR2_BTN_SELECTOR = '.add-door-2';
-var ADD_DOOR3_BTN_SELECTOR = '.add-door-3';
-var ADD_DOOR4_BTN_SELECTOR = '.add-door-4';
-var ADD_DOOR1_BTN = document.querySelector(ADD_DOOR1_BTN_SELECTOR);
-var ADD_DOOR2_BTN = document.querySelector(ADD_DOOR2_BTN_SELECTOR);
-var ADD_DOOR3_BTN = document.querySelector(ADD_DOOR3_BTN_SELECTOR);
-var ADD_DOOR4_BTN = document.querySelector(ADD_DOOR4_BTN_SELECTOR);
-var CARTLIST_SELECTOR = '.header__cart-items';
-var CARTLIST = document.querySelector(CARTLIST_SELECTOR);
-var CART_ITEM_AMOUNT_SELECTOR = '.header__cart-item-amount';
-var CART_ITEM_PRICE_SELECTOR = '.header__cart-item-price';
-var NO_ITEMS_SELECTOR = '.header__cart-item_no-items';
-var CART_TOTAL = document.querySelector('.header__class-total');
-var NO_ITEMS_ELEMENT = CARTLIST.querySelector(NO_ITEMS_SELECTOR);
+//functions
 function renderCartTotal() {
     CART_TOTAL.textContent = "".concat(CART_INFO.total);
+}
+function getCartItem(cartItemObject) {
+    return document.querySelector(cartItemObject.selector);
+}
+function increaseAmount(cartItemObject) {
+    var CART_ITEM_ELEMENT = getCartItem(cartItemObject);
+    var AMOUNT_ELEMENT = CART_ITEM_ELEMENT.querySelector(CART_ITEM_AMOUNT_SELECTOR);
+    var PRICE_ELEMENT = CART_ITEM_ELEMENT.querySelector(CART_ITEM_PRICE_SELECTOR);
+    cartItemObject.amount += 1;
+    CART_INFO.total += cartItemObject.price;
+    CART_INFO.itemsTotal += 1;
+    renderItemsTotal();
+    renderCartTotal();
+    renderNewItemAmount(AMOUNT_ELEMENT, cartItemObject.amount);
+    renderNewTotalOfItem(PRICE_ELEMENT, cartItemObject.price * cartItemObject.amount);
+}
+function blurInput(input) {
+    input.blur();
+}
+function placeholderName(element) {
+    element.classList.toggle(JS_ACTIVE_CLASS);
+}
+function toggleBottomMenu() {
+    BOTTOM_MENU.classList.toggle(BOTTOM_MENU_OPENED_CLASS);
 }
 function renderItemInCart(cartItemObject) {
     CART_INFO.isEmpty = false;
     CART_INFO.elements += 1;
+    CART_INFO.itemsTotal += 1;
+    renderItemsTotal();
+    ITEMS_TOTAL_ELEMENT.classList.remove('d-none');
     console.log(!NO_ITEMS_ELEMENT.classList.contains('d-none'));
     if (!NO_ITEMS_ELEMENT.classList.contains('d-none')) {
         NO_ITEMS_ELEMENT.classList.add('d-none');
@@ -137,16 +160,19 @@ function renderItemInCart(cartItemObject) {
 function renderNewItemAmount(amountElement, newAmount) {
     amountElement.textContent = "".concat(newAmount);
 }
-function renderNewTotalOfItem(priceElement, newTotal) {
-    priceElement.textContent = "".concat(newTotal, " \u0420");
+function renderItemsTotal() {
+    ITEMS_TOTAL_ELEMENT.textContent = "".concat(CART_INFO.itemsTotal);
 }
 function decreaseAmount(cartItemObject) {
     var CART_ITEM_ELEMENT = getCartItem(cartItemObject);
+    console.log(CART_ITEM_ELEMENT);
     var AMOUNT_ELEMENT = CART_ITEM_ELEMENT.querySelector(CART_ITEM_AMOUNT_SELECTOR);
     var PRICE_ELEMENT = CART_ITEM_ELEMENT.querySelector(CART_ITEM_PRICE_SELECTOR);
     if (cartItemObject.amount > 1) {
         cartItemObject.amount -= 1;
         CART_INFO.total -= cartItemObject.price;
+        CART_INFO.itemsTotal -= 1;
+        renderItemsTotal();
         renderCartTotal();
         renderNewTotalOfItem(PRICE_ELEMENT, cartItemObject.price * cartItemObject.amount);
         renderNewItemAmount(AMOUNT_ELEMENT, cartItemObject.amount);
@@ -155,9 +181,11 @@ function decreaseAmount(cartItemObject) {
         cartItemObject.amount -= 1;
         CART_INFO.total -= cartItemObject.price;
         CART_INFO.elements -= 1;
+        CART_INFO.itemsTotal -= 1;
         if (CART_INFO.elements === 0) {
             CART_INFO.isEmpty = true;
             NO_ITEMS_ELEMENT.classList.remove('d-none');
+            ITEMS_TOTAL_ELEMENT.classList.add('d-none');
         }
         renderCartTotal();
         CARTLIST.removeChild(CART_ITEM_ELEMENT);
@@ -166,32 +194,11 @@ function decreaseAmount(cartItemObject) {
         return;
     }
 }
-function increaseAmount(cartItemObject) {
-    var CART_ITEM_ELEMENT = getCartItem(cartItemObject);
-    var AMOUNT_ELEMENT = CART_ITEM_ELEMENT.querySelector(CART_ITEM_AMOUNT_SELECTOR);
-    var PRICE_ELEMENT = CART_ITEM_ELEMENT.querySelector(CART_ITEM_PRICE_SELECTOR);
-    cartItemObject.amount += 1;
-    CART_INFO.total += cartItemObject.price;
-    renderCartTotal();
-    renderNewItemAmount(AMOUNT_ELEMENT, cartItemObject.amount);
-    renderNewTotalOfItem(PRICE_ELEMENT, cartItemObject.price * cartItemObject.amount);
+function renderNewTotalOfItem(priceElement, newTotal) {
+    priceElement.textContent = "".concat(newTotal, " \u0420");
 }
-function getCartItem(cartItemObject) {
-    return document.querySelector(cartItemObject.selector);
-}
-ADD_DOOR1_BTN.addEventListener('click', function () {
-    addItemInCart(door1);
-});
-ADD_DOOR2_BTN.addEventListener('click', function () {
-    addItemInCart(door2);
-});
-ADD_DOOR3_BTN.addEventListener('click', function () {
-    addItemInCart(door3);
-});
-ADD_DOOR4_BTN.addEventListener('click', function () {
-    addItemInCart(door4);
-});
 function addItemInCart(cartItem) {
+    console.log(cartItem);
     if (cartItem.amount === 0) {
         cartItem.amount += 1;
         renderItemInCart(cartItem);
@@ -207,5 +214,26 @@ function addItemInCart(cartItem) {
         renderNewTotalOfItem(PRICE_ELEMENT, cartItem.amount * cartItem.price);
         CART_INFO.total += cartItem.price;
         renderCartTotal();
+        CART_INFO.itemsTotal += 1;
+        renderItemsTotal();
     }
 }
+//event listeners
+console.log(ADD_DOOR1_BTN);
+BOTTOMNAV_MENU_BUTTON.addEventListener('click', toggleBottomMenu);
+HEADER__CLOSE_SEARCH_BUTTON.addEventListener('click', function () { return blurInput(HEADER__SEARCH_INPUT); });
+HEADER__SEARCH_INPUT.addEventListener("focusout", function () { return placeholderName(HEADER__SEARCH); });
+HEADER__SEARCH_INPUT.addEventListener("focus", function () { return placeholderName(HEADER__SEARCH); });
+ADD_DOOR1_BTN.addEventListener('click', function () {
+    addItemInCart(door1);
+});
+ADD_DOOR2_BTN.addEventListener('click', function () {
+    addItemInCart(door2);
+});
+ADD_DOOR3_BTN.addEventListener('click', function () {
+    addItemInCart(door3);
+});
+ADD_DOOR4_BTN.addEventListener('click', function () {
+    addItemInCart(door4);
+});
+OPEN_CART_BTN.addEventListener('click', function () { CART_ELEMENT.classList.toggle('d-none'); });

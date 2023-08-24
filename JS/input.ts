@@ -1,37 +1,26 @@
+//selectors
+
+const CART_ITEM_AMOUNT_SELECTOR:string = '.header__cart-item-amount'
+const CART_ITEM_PRICE_SELECTOR:string = '.header__cart-item-price'
+const NO_ITEMS_SELECTOR:string = '.header__cart-item_no-items'
+const ADD_DOOR1_BTN_SELECTOR:string = '.add-door-1'
+const ADD_DOOR2_BTN_SELECTOR:string = '.add-door-2'
+const ADD_DOOR3_BTN_SELECTOR:string = '.add-door-3'
+const ADD_DOOR4_BTN_SELECTOR:string = '.add-door-4'
 const HEADER__CLOSE_SEARCH_BUTTON_SELECTOR:string = '.header__search-close-icon'
 const HEADER__SEARCH_SELECTOR:string = '.header__search-container'
+const OPEN_CART_SELECTOR:string = '.base-icon_cart-js-selector-header'
 const HEADER__SEARCH_INPUT_SELECTOR:string = '.header__search'
-const HEADER__SEARCH_INPUT:HTMLElement = document.querySelector(HEADER__SEARCH_INPUT_SELECTOR)
-const HEADER__CLOSE_SEARCH_BUTTON:HTMLElement = document.querySelector(HEADER__CLOSE_SEARCH_BUTTON_SELECTOR)
-const HEADER__SEARCH:HTMLElement = document.querySelector(HEADER__SEARCH_SELECTOR)
-const JS_ACTIVE_CLASS:string = 'js-added-active'
-
-function blurInput(input:HTMLElement):void {
-    input.blur()
-}
-
-function placeholderName(element:HTMLElement):void {
-    element.classList.toggle(JS_ACTIVE_CLASS)
-}
-
-HEADER__CLOSE_SEARCH_BUTTON.addEventListener('click',() => blurInput(HEADER__SEARCH_INPUT))
-
-HEADER__SEARCH_INPUT.addEventListener("focusout", () => placeholderName(HEADER__SEARCH))
-HEADER__SEARCH_INPUT.addEventListener("focus", () => placeholderName(HEADER__SEARCH))
-
-const BOTTOMNAV_MENU_BUTTON_SELECTOR:string = '.bottom-nav__button_menu'
-const BOTTOMNAV_MENU_BUTTON:HTMLElement = document.querySelector(BOTTOMNAV_MENU_BUTTON_SELECTOR)
-
+const CARTLIST_SELECTOR:string = '.header__cart-items'
 const BOTTOM_MENU_SELECTOR:string = '.bottom-nav__menu'
 const BOTTOM_MENU_OPENED_CLASS:string = 'bottom-nav__menu_opened'
-const BOTTOM_MENU:HTMLElement = document.querySelector(BOTTOM_MENU_SELECTOR)
+const BOTTOMNAV_MENU_BUTTON_SELECTOR:string = '.bottom-nav__button_menu'
+const CART_ITEM_TEMPLATE_SELECTOR:string = '.header__cart-item-template'
+const CART_ITEM_SELECTOR:string = '.header__cart-item-start-selector'
+const CART_ITEM_START_CLASS:string = 'header__cart-item-start-selector'
+const JS_ACTIVE_CLASS:string = 'js-added-active'
 
-function toggleBottomMenu():void {
-    BOTTOM_MENU.classList.toggle(BOTTOM_MENU_OPENED_CLASS)
-}
-
-BOTTOMNAV_MENU_BUTTON.addEventListener('click', toggleBottomMenu)
-
+//types declarations
 
 type typeCartItem = {
     name: string
@@ -47,12 +36,7 @@ type typeCartInfo = {
     isEmpty: boolean
     total: number
     elements: number
-}
-
-const CART_INFO:typeCartInfo = {
-    isEmpty: true,
-    total: 0,
-    elements: 0
+    itemsTotal: number
 }
 
 type cartImageInfo = {
@@ -60,6 +44,35 @@ type cartImageInfo = {
     path_webp: string
     alt: string
 }
+
+//constants
+
+const OPEN_CART_BTN:HTMLElement = document.querySelector(OPEN_CART_SELECTOR)
+const CART_ITEM_TEMPLATE:HTMLTemplateElement = document.querySelector(CART_ITEM_TEMPLATE_SELECTOR)
+const CART_ITEM_NODE = CART_ITEM_TEMPLATE.content.querySelector(CART_ITEM_SELECTOR).cloneNode(true)
+const ADD_DOOR1_BTN:HTMLElement = document.querySelector(ADD_DOOR1_BTN_SELECTOR)
+const ADD_DOOR2_BTN:HTMLElement = document.querySelector(ADD_DOOR2_BTN_SELECTOR)
+const ADD_DOOR3_BTN:HTMLElement = document.querySelector(ADD_DOOR3_BTN_SELECTOR)
+const CART_ELEMENT:HTMLElement = document.querySelector('.header__cart-block')
+const ADD_DOOR4_BTN:HTMLElement = document.querySelector(ADD_DOOR4_BTN_SELECTOR)
+const BOTTOMNAV_MENU_BUTTON:HTMLElement = document.querySelector(BOTTOMNAV_MENU_BUTTON_SELECTOR)
+const BOTTOM_MENU:HTMLElement = document.querySelector(BOTTOM_MENU_SELECTOR)
+const CARTLIST:HTMLTemplateElement = document.querySelector(CARTLIST_SELECTOR)
+const CART_TOTAL:HTMLSpanElement = document.querySelector('.header__class-total')
+let NO_ITEMS_ELEMENT:HTMLElement = CARTLIST.querySelector(NO_ITEMS_SELECTOR)
+const ITEMS_TOTAL_ELEMENT:HTMLParagraphElement = OPEN_CART_BTN.querySelector('.header__cart-total-display')
+const HEADER__SEARCH_INPUT:HTMLElement = document.querySelector(HEADER__SEARCH_INPUT_SELECTOR)
+const HEADER__CLOSE_SEARCH_BUTTON:HTMLElement = document.querySelector(HEADER__CLOSE_SEARCH_BUTTON_SELECTOR)
+const HEADER__SEARCH:HTMLElement = document.querySelector(HEADER__SEARCH_SELECTOR)
+
+//objects
+const CART_INFO:typeCartInfo = {
+    isEmpty: true,
+    total: 0,
+    elements: 0,
+    itemsTotal: 0
+}
+
 
 let door1:typeCartItem = {
     name: 'Браво-22 Snow Melinga',
@@ -77,8 +90,8 @@ let door1:typeCartItem = {
 let door3:typeCartItem = {
     name: 'Тестовая дверь',
     description: 'Межкомнатная дверь',
-    selector: '.header__cart-item_door1',
-    class: 'header__cart-item_door1',
+    selector: '.header__cart-item_door3',
+    class: 'header__cart-item_door3',
     price: 25000,
     amount: 0,
     image_info: {
@@ -90,8 +103,8 @@ let door3:typeCartItem = {
 let door4:typeCartItem = {
     name: 'Тестовая дверь 2',
     description: 'Межкомнатная дверь',
-    selector: '.header__cart-item_door1',
-    class: 'header__cart-item_door1',
+    selector: '.header__cart-item_door4',
+    class: 'header__cart-item_door4',
     price: 250000,
     amount: 0,
     image_info: {
@@ -114,37 +127,48 @@ let door2:typeCartItem = {
         alt: 'Межкомнатная дверь Браво-22 Snow Melinga'
     }
 }
-const CART_ITEM_TEMPLATE_SELECTOR:string = '.header__cart-item-template'
-const CART_ITEM_SELECTOR:string = '.header__cart-item-start-selector'
-const CART_ITEM_START_CLASS:string = 'header__cart-item-start-selector'
-const CART_ITEM_TEMPLATE:HTMLTemplateElement = document.querySelector(CART_ITEM_TEMPLATE_SELECTOR)
-const CART_ITEM_NODE = CART_ITEM_TEMPLATE.content.querySelector(CART_ITEM_SELECTOR).cloneNode(true)
-const ADD_DOOR1_BTN_SELECTOR:string = '.add-door-1'
-const ADD_DOOR2_BTN_SELECTOR:string = '.add-door-2'
-const ADD_DOOR3_BTN_SELECTOR:string = '.add-door-3'
-const ADD_DOOR4_BTN_SELECTOR:string = '.add-door-4'
-const ADD_DOOR1_BTN:HTMLElement = document.querySelector(ADD_DOOR1_BTN_SELECTOR)
-const ADD_DOOR2_BTN:HTMLElement = document.querySelector(ADD_DOOR2_BTN_SELECTOR)
-const ADD_DOOR3_BTN:HTMLElement = document.querySelector(ADD_DOOR3_BTN_SELECTOR)
-const ADD_DOOR4_BTN:HTMLElement = document.querySelector(ADD_DOOR4_BTN_SELECTOR)
-const CARTLIST_SELECTOR:string = '.header__cart-items'
-const CARTLIST:HTMLTemplateElement = document.querySelector(CARTLIST_SELECTOR)
-const CART_ITEM_AMOUNT_SELECTOR:string = '.header__cart-item-amount'
-const CART_ITEM_PRICE_SELECTOR:string = '.header__cart-item-price'
-const NO_ITEMS_SELECTOR:string = '.header__cart-item_no-items'
-const CART_TOTAL:HTMLSpanElement = document.querySelector('.header__class-total')
-let NO_ITEMS_ELEMENT:HTMLElement = CARTLIST.querySelector(NO_ITEMS_SELECTOR)
 
-
-
+//functions
 
 function renderCartTotal():void {
     CART_TOTAL.textContent = `${CART_INFO.total}`
 }
 
+function getCartItem(cartItemObject:typeCartItem):HTMLElement {
+    return document.querySelector(cartItemObject.selector)
+}
+
+function increaseAmount(cartItemObject:typeCartItem):void {
+    const CART_ITEM_ELEMENT:HTMLElement = getCartItem(cartItemObject)
+    const AMOUNT_ELEMENT:HTMLParagraphElement = CART_ITEM_ELEMENT.querySelector(CART_ITEM_AMOUNT_SELECTOR)
+    const PRICE_ELEMENT:HTMLParagraphElement = CART_ITEM_ELEMENT.querySelector(CART_ITEM_PRICE_SELECTOR)
+    cartItemObject.amount +=1
+    CART_INFO.total += cartItemObject.price
+    CART_INFO.itemsTotal += 1
+    renderItemsTotal()
+    renderCartTotal()
+    renderNewItemAmount(AMOUNT_ELEMENT, cartItemObject.amount)
+    renderNewTotalOfItem(PRICE_ELEMENT, cartItemObject.price * cartItemObject.amount)
+}
+
+function blurInput(input:HTMLElement):void {
+    input.blur()
+}
+
+function placeholderName(element:HTMLElement):void {
+    element.classList.toggle(JS_ACTIVE_CLASS)
+}
+
+function toggleBottomMenu():void {
+    BOTTOM_MENU.classList.toggle(BOTTOM_MENU_OPENED_CLASS)
+}
+
 function renderItemInCart(cartItemObject:typeCartItem):void {
     CART_INFO.isEmpty = false
     CART_INFO.elements += 1
+    CART_INFO.itemsTotal +=1
+    renderItemsTotal()
+    ITEMS_TOTAL_ELEMENT.classList.remove('d-none')
     console.log(!NO_ITEMS_ELEMENT.classList.contains('d-none'))
     if (!NO_ITEMS_ELEMENT.classList.contains('d-none')) {
         NO_ITEMS_ELEMENT.classList.add('d-none')
@@ -177,20 +201,20 @@ function renderItemInCart(cartItemObject:typeCartItem):void {
 function renderNewItemAmount(amountElement:HTMLParagraphElement, newAmount:number) {
     amountElement.textContent = `${newAmount}`
 }
-
-function renderNewTotalOfItem(priceElement: HTMLParagraphElement, newTotal:number) {
-    priceElement.textContent = `${newTotal} Р`
+function renderItemsTotal():void {
+    ITEMS_TOTAL_ELEMENT.textContent =  `${CART_INFO.itemsTotal}`
 }
-
-
 
 function decreaseAmount(cartItemObject:typeCartItem):void {
     const CART_ITEM_ELEMENT:HTMLElement = getCartItem(cartItemObject)
+    console.log(CART_ITEM_ELEMENT)
     const AMOUNT_ELEMENT:HTMLParagraphElement = CART_ITEM_ELEMENT.querySelector(CART_ITEM_AMOUNT_SELECTOR)
     const PRICE_ELEMENT:HTMLParagraphElement = CART_ITEM_ELEMENT.querySelector(CART_ITEM_PRICE_SELECTOR)
     if (cartItemObject.amount > 1) {
         cartItemObject.amount -= 1
         CART_INFO.total -= cartItemObject.price
+        CART_INFO.itemsTotal -= 1
+        renderItemsTotal()
         renderCartTotal()
         renderNewTotalOfItem(PRICE_ELEMENT, cartItemObject.price * cartItemObject.amount)
         renderNewItemAmount(AMOUNT_ELEMENT, cartItemObject.amount)
@@ -199,9 +223,11 @@ function decreaseAmount(cartItemObject:typeCartItem):void {
         cartItemObject.amount -= 1
         CART_INFO.total -= cartItemObject.price
         CART_INFO.elements -= 1
+        CART_INFO.itemsTotal -= 1
         if (CART_INFO.elements === 0) {
             CART_INFO.isEmpty = true
             NO_ITEMS_ELEMENT.classList.remove('d-none')
+            ITEMS_TOTAL_ELEMENT.classList.add('d-none')
         }
         renderCartTotal()
         CARTLIST.removeChild(CART_ITEM_ELEMENT)
@@ -211,39 +237,12 @@ function decreaseAmount(cartItemObject:typeCartItem):void {
     }
 }
 
-function increaseAmount(cartItemObject:typeCartItem):void {
-    const CART_ITEM_ELEMENT:HTMLElement = getCartItem(cartItemObject)
-    const AMOUNT_ELEMENT:HTMLParagraphElement = CART_ITEM_ELEMENT.querySelector(CART_ITEM_AMOUNT_SELECTOR)
-    const PRICE_ELEMENT:HTMLParagraphElement = CART_ITEM_ELEMENT.querySelector(CART_ITEM_PRICE_SELECTOR)
-    cartItemObject.amount +=1
-    CART_INFO.total += cartItemObject.price
-    renderCartTotal()
-    renderNewItemAmount(AMOUNT_ELEMENT, cartItemObject.amount)
-    renderNewTotalOfItem(PRICE_ELEMENT, cartItemObject.price * cartItemObject.amount)
+function renderNewTotalOfItem(priceElement: HTMLParagraphElement, newTotal:number) {
+    priceElement.textContent = `${newTotal} Р`
 }
-function getCartItem(cartItemObject:typeCartItem):HTMLElement {
-    return document.querySelector(cartItemObject.selector)
-}
-
-
-ADD_DOOR1_BTN.addEventListener('click', () => {
-    addItemInCart(door1)
-})
-
-ADD_DOOR2_BTN.addEventListener('click', () => {
-    addItemInCart(door2)
-})
-ADD_DOOR3_BTN.addEventListener('click', () => {
-    addItemInCart(door3)
-})
-ADD_DOOR4_BTN.addEventListener('click', () => {
-    addItemInCart(door4)
-})
-
-
-
 
 function addItemInCart(cartItem:typeCartItem):void {
+    console.log(cartItem)
     if (cartItem.amount === 0)  {
         cartItem.amount += 1
         renderItemInCart(cartItem)
@@ -259,7 +258,33 @@ function addItemInCart(cartItem:typeCartItem):void {
         renderNewTotalOfItem(PRICE_ELEMENT, cartItem.amount  * cartItem.price)
         CART_INFO.total += cartItem.price
         renderCartTotal()
-    }
+        CART_INFO.itemsTotal +=1
+        renderItemsTotal()
+    }}
 
 
-}
+//event listeners
+
+console.log(ADD_DOOR1_BTN)
+
+BOTTOMNAV_MENU_BUTTON.addEventListener('click', toggleBottomMenu)
+HEADER__CLOSE_SEARCH_BUTTON.addEventListener('click',() => blurInput(HEADER__SEARCH_INPUT))
+HEADER__SEARCH_INPUT.addEventListener("focusout", () => placeholderName(HEADER__SEARCH))
+HEADER__SEARCH_INPUT.addEventListener("focus", () => placeholderName(HEADER__SEARCH))
+
+ADD_DOOR1_BTN.addEventListener('click', () => {
+    addItemInCart(door1)
+})
+
+ADD_DOOR2_BTN.addEventListener('click', () => {
+    addItemInCart(door2)
+})
+ADD_DOOR3_BTN.addEventListener('click', () => {
+    addItemInCart(door3)
+})
+
+ADD_DOOR4_BTN.addEventListener('click', () => {
+    addItemInCart(door4)
+})
+
+OPEN_CART_BTN.addEventListener('click',() => {CART_ELEMENT.classList.toggle('d-none')})

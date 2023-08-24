@@ -20,6 +20,15 @@
 
 //переход на мобилку - 1110
 
+.med-13-text
+  font-family: TT Norms Pro
+  font-size: 13px
+  font-weight: 500
+  line-height: 17px
+  letter-spacing: 0em
+  text-align: left
+
+
 .d-none
   display: none!important
 
@@ -437,7 +446,10 @@
   display: flex
   position: absolute
   flex-direction: column
-  width: 384px
+  @media screen and (max-width: 1921px)
+    width: 100%
+  @media screen and (max-width: 1920px)
+    width: 384px
   top: 80px
   right: 0
   min-height: 499px
@@ -527,6 +539,21 @@
   background-image: url("../includes/images/header/minus-icon.svg")
 
 
+.base-icon_cart-js-selector-header
+  position: relative
+
+.header__cart-total-display
+  display: flex
+  position: absolute
+  width: 21px
+  height: 16px
+  border-radius: 4px
+  background-color: #D2EE9A
+  align-items: center
+  justify-content: center
+  top: -8px
+  right: -8px
+
 .header__cart-confirmation-block
   display: flex
   flex-direction: column
@@ -547,8 +574,6 @@
   line-height: 19px
   letter-spacing: 0em
   text-align: center
-
-
 
 .bottom-nav
   position: relative
