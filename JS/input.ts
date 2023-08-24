@@ -139,25 +139,13 @@ let door2:typeCartItem = {
 //functions
 
 function renderCartTotal():void {
-    CART_TOTAL.textContent = `${CART_INFO.total}`
+    CART_TOTAL.textContent = `${CART_INFO.total} Р`
 }
 
 function getCartItem(cartItemObject:typeCartItem):HTMLElement {
     return document.querySelector(cartItemObject.selector)
 }
 
-function increaseAmount(cartItemObject:typeCartItem):void {
-    const CART_ITEM_ELEMENT:HTMLElement = getCartItem(cartItemObject)
-    const AMOUNT_ELEMENT:HTMLParagraphElement = CART_ITEM_ELEMENT.querySelector(CART_ITEM_AMOUNT_SELECTOR)
-    const PRICE_ELEMENT:HTMLParagraphElement = CART_ITEM_ELEMENT.querySelector(CART_ITEM_PRICE_SELECTOR)
-    cartItemObject.amount +=1
-    CART_INFO.total += cartItemObject.price
-    CART_INFO.itemsTotal += 1
-    renderItemsTotal()
-    renderCartTotal()
-    renderNewItemAmount(AMOUNT_ELEMENT, cartItemObject.amount)
-    renderNewTotalOfItem(PRICE_ELEMENT, cartItemObject.price * cartItemObject.amount)
-}
 
 function blurInput(input:HTMLElement):void {
     input.blur()
@@ -243,6 +231,19 @@ function decreaseAmount(cartItemObject:typeCartItem):void {
     else {
         return
     }
+}
+
+function increaseAmount(cartItemObject:typeCartItem):void {
+    const CART_ITEM_ELEMENT:HTMLElement = getCartItem(cartItemObject)
+    const AMOUNT_ELEMENT:HTMLParagraphElement = CART_ITEM_ELEMENT.querySelector(CART_ITEM_AMOUNT_SELECTOR)
+    const PRICE_ELEMENT:HTMLParagraphElement = CART_ITEM_ELEMENT.querySelector(CART_ITEM_PRICE_SELECTOR)
+    cartItemObject.amount +=1
+    CART_INFO.total += cartItemObject.price
+    CART_INFO.itemsTotal += 1
+    renderItemsTotal()
+    renderCartTotal()
+    renderNewItemAmount(AMOUNT_ELEMENT, cartItemObject.amount)
+    renderNewTotalOfItem(PRICE_ELEMENT, cartItemObject.price * cartItemObject.amount)
 }
 
 function renderNewTotalOfItem(priceElement: HTMLParagraphElement, newTotal:number) {
